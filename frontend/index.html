@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spotify, Weather, and MVG</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Spotify Playlists</h1>
+  <div id="playlists"></div>
+
+  <h1>Weather in Munich</h1>
+  <div id="weather"></div>
+
+  <h1>MVG Departures from Fraunhoferstraße</h1>
+  <div id="mvg"></div>
+
+  <script>
+    async function fetchData() {
+      try {
+        const response = await fetch('http://localhost:5000');
+        const data = await response.json();
+
+        // Display Spotify Playlists
+        const playlistsDiv = document.getElementById('playlists');
+        data.spotify_playlists.forEach(playlist => {
+          const p = document.createElement('p');
+          p.textContent = `${playlist.name} - ${playlist.total_tracks} tracks`;
+          playlistsDiv.appendChild(p);
+        });
+
+        // Display Weather
+        const weatherDiv = document.getElementById('weather');
+        weatherDiv.textContent = `Temperature: ${data.weather.temperature}°C, Humidity: ${data.weather.humidity}%, ${data.weather.description}`;
+
+        // Display MVG Departures
+        const mvgDiv = document.getElementById('mvg');
+        data.mvg_departures.forEach(departure => {
+          const p = document.createElement('p');
+          p.textContent = `Line ${departure.line} to ${departure.destination} in ${departure.departureTime} minutes`;
+          mvgDiv.appendChild(p);
+        });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    fetchData();
+  </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+spotify_weather_mvg_project/
+├── backend/
+│   ├── app.py              # Python backend
+│   ├── spotify.py          # Spotify-related functionality
+│   ├── weather.py          # Weather-related functionality
+│   ├── mvg.py              # MVG-related functionality
+│   └── requirements.txt    # Python dependencies
+├── frontend/
+│   ├── index.html          # HTML frontend
+│   ├── style.css           # Optional CSS for styling
+└── README.md               # Documentation for the project

@@ -11,3 +11,4 @@ def get_weather_data(city):
         'humidity': data['main']['humidity'],
         'description': data['weather'][0]['description']
     }
+ 
